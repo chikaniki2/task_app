@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    models:
+      task: "タスク"
+    attributes:
+      task:
+        title: "タイトル"
+        date_start: "開始日"
+        date_end: "終了日"
+        is_allday: "終日"
+        memo: "メモ"

@@ -9,7 +9,18 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <header>
+    <h1>Ruby on Rails スケジュール管理アプリ</h1>
+  </header>
+
   <body>
-    <%= yield %>
+    <div class="main_container">
+      <%= yield %>
+    </div>
   </body>
+
+  <footer>
+    <h1>現在の日時 : <%= Time.now.to_s(:datetime_jp) %>
+    <%= flash[:taskcount]%></h1>
+  </footer>
 </html>
