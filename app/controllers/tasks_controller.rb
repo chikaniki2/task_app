@@ -10,7 +10,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(params.require(:task).permit(:title, :date_start, :date_end, :is_allday, :memo))
+    @task = Task.new(task_params)
     if @task.save
       flash[:notice] = "スケジュールを新規登録しました"
       redirect_to :tasks
@@ -29,7 +29,7 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
-    if @task.update(params.require(:task).permit(:title, :date_start, :date_end, :is_allday, :memo))
+    if @task.update(task_params)
       flash[:notice] = "スケジュールID「#{@task.id}」の情報を更新しました" #フラッシュメッセージ
       redirect_to :tasks #指定のビューへ転送
     else
@@ -38,9 +38,15 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task = Task.find(params[:id])
-    @task.destroy
+    task = Task.find(params[:id])
+    task.destroy
     flash[:dlt] = "スケジュールを削除しました"
     redirect_to :tasks
+  end
+
+  private
+
+  def task_params
+    params.require(:task).permit(:title, :date_start, :date_end, :is_allday, :memo)
   end
 end
